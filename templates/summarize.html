@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summary</title>
+  <style>
+    /* Navbar styles */
+    .navbar {
+      background-color: #007bff;
+      padding: 10px 0;
+    }
+
+    .navbar-brand {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      padding-left: 20px;
+    }
+
+    /* Container styles */
+    .summary-container {
+      margin: 50px auto;
+      width: 80%;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .summary-container h2 {
+      color: #333;
+    }
+
+    .summary-container p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Align contents in center */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a class="navbar-brand" href="/">Home</a>
+  </div>
+  <!-- on method post we will take an input from the search bar that will send the output back -->
+  <form action="/summarize" method="post">
+    <div class="form-group">
+      <label for="text">Enter the tag :</label>
+      <textarea class="form-control" id="text" name="tag" rows="1"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Summarize</button>
+  </form>
+  
+
+  <div class="summary-container">
+    <h2>Summary</h2>
+    <p>{{ summary }}</p>
+  </div>
+</body>
+</html>

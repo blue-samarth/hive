@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Transactions</title>
+  <style>
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      border-bottom: 2px solid #ccc;
+    }
+
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  /* height: 100vh; Set body height to 100% of the viewport height */
+  /* width: 100vw; */
+}
+
+
+    .navbar {
+      overflow: hidden;
+      background-color: #007bff; /* Blue color */
+      position: fixed; /* Fixed position */
+      top: 0; /* Set to top of viewport */
+      width: 100%; /* Full width */
+      z-index: 1000; /* Ensure it's on top of other content */
+    }
+
+    .navbar-option {
+      float: right;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .navbar-brand {
+      float: left;
+      padding: 14px 16px;
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+    }
+
+    .search-container {
+      float: right;
+    }
+
+    input[type=text] {
+      padding: 6px;
+      margin-top: 8px;
+      font-size: 17px;
+      border: none;
+    }
+
+    input[type=text]::placeholder {
+      color: #ddd;
+    }
+
+    input[type=text]:focus {
+      outline: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .search-container {
+        float: none;
+      }
+      input[type=text] {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+        <a class="navbar-brand" href="/">Hive WayFarer</a>
+        <!-- <a class="navbar-option" href="/transactions">Transactions</a> -->
+        <!-- we will display block number here -->
+        <span class="block-number">Block Number: {{ block_num }}</span>
+        <div class="search-container">
+          <!-- add a button in which summarize -->
+          <a class="navbar-option" href="/summarize">Summarize</a>
+          <div class="search-container">
+            <form action="/search" method="POST">
+              <input type="text" class="search-input" id="searchInput" name="search" placeholder="Search...">
+              <button class="search-button" >Search</button>
+              </form>
+            </div>
+        </div>
+        <!-- <div class="search-container">
+          <form action="/search" method="get">
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit" action="url_for{{search}}">Search</button>
+          </form>
+        </div> -->
+      </div>
+  <h2>User Transaction Details</h2>
+  {% for transaction in transactions %}
+  <table>
+    <tr>
+      <th>Expiration</th>
+      <th>Extensions</th>
+      <th>Operations Value</th>
+      <th>Signatures</th>
+      <th>Ref Block Number</th>
+      <th>Ref Block Prefix</th>
+      <th>Operation Type</th>
+      <th>Operation Value</th>
+    </tr>
+    <tr>
+      <td>{{ transaction.expiration }}</td>
+      <td>{{ transaction.extensions }}</td>
+      <td>
+        {% for operation in transaction.operations %}
+          {% if operation.type == 'custom_json_operation' %}
+            {% set value = operation.value %}
+            {% if 'id' in value %}
+              {{ value.id }}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </td>
+      <td>{{ transaction.signatures }}</td>
+      <td>{{ transaction.ref_block_num }}</td>
+      <td>{{ transaction.ref_block_prefix }}</td>
+      <td>{{ transaction.operation_type }}</td>
+      <td>{{ transaction.operation_value }}</td>
+    </tr>
+  </table>
+  {% endfor %}
+</body>
+</html>

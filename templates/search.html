@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Details</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  </style>
+</head>
+<body>
+
+<h2>Transaction Details</h2>
+<!-- {% for transaction in transactions %} -->
+<table>
+  <tr>
+    <th>To</th>
+    <th>From</th>
+    <th>Memo</th>
+    <th>Amount</th>
+    <th>Block</th>
+    <th>Transaction ID</th>
+    <th>Timestamp</th>
+    <th>Account</th>
+    <th>Type</th>
+    <th>Operation ID</th>
+  </tr>
+  <tr>
+    <td>{{ transaction.to }}</td>
+    <td>{{ transaction.from }}</td>
+    <td>{{ transaction.memo }}</td>
+    <td>{{ transaction.amount.amount }}</td>
+    <td>{{ transaction.block }}</td>
+    <td>{{ transaction.trx_id }}</td>
+    <td>{{ transaction.timestamp }}</td>
+    <td>{{ transaction.account }}</td>
+    <td>{{ transaction.type }}</td>
+    <td>{{ transaction.operation_id }}</td>
+  </tr>
+</table>
+<!-- {% endfor %} -->
+
+</body>
+</html>
